@@ -3,33 +3,58 @@
 /*
 Set the motors to the correct ports
 */
-void forward()
+void forward(double amount)
 {
-    Top_Left.rotateFor(360, rotationUnits::deg, 100, velocityUnits::pct, false);
-    Bottom_Left.rotateFor(360, rotationUnits::deg, 100, velocityUnits::pct, false);
-    Top_Right.rotateFor(360, rotationUnits::deg, 100, velocityUnits::pct, false);
-    Bottom_Left.rotateFor(360, rotationUnits::deg, 100, velocityUnits::pct, true);
+    Top_Left.rotateFor(amount, rotationUnits::deg, 100, velocityUnits::pct, false);
+    Bottom_Left.rotateFor(amount, rotationUnits::deg, 100, velocityUnits::pct, false);
+    Top_Right.rotateFor(amount, rotationUnits::deg, 100, velocityUnits::pct, false);
+    Bottom_Left.rotateFor(amount, rotationUnits::deg, 100, velocityUnits::pct, true);
 }
-void backward()
+void backward(double amount)
 {
-    Top_Left.rotateFor(-360, rotationUnits::deg, 100, velocityUnits::pct, false);
-    Bottom_Left.rotateFor(-360, rotationUnits::deg, 100, velocityUnits::pct, false);
-    Top_Right.rotateFor(360, rotationUnits::deg, 100, velocityUnits::pct, false);
-    Bottom_Left.rotateFor(360, rotationUnits::deg, 100, velocityUnits::pct, true);
+    Top_Left.rotateFor(-amount, rotationUnits::deg, 100, velocityUnits::pct, false);
+    Bottom_Left.rotateFor(-amount, rotationUnits::deg, 100, velocityUnits::pct, false);
+    Top_Right.rotateFor(amount, rotationUnits::deg, 100, velocityUnits::pct, false);
+    Bottom_Left.rotateFor(amount, rotationUnits::deg, 100, velocityUnits::pct, true);
 }
-void right()
+void right(double amount)
 {
-    Top_Left.rotateFor(360, rotationUnits::deg, 100, velocityUnits::pct, false);
-    Bottom_Left.rotateFor(-360, rotationUnits::deg, 100, velocityUnits::pct, false);
-    Top_Right.rotateFor(-360, rotationUnits::deg, 100, velocityUnits::pct, false);
-    Bottom_Left.rotateFor(360, rotationUnits::deg, 100, velocityUnits::pct, true);
+    Top_Left.rotateFor(amount, rotationUnits::deg, 100, velocityUnits::pct, false);
+    Bottom_Left.rotateFor(-amount, rotationUnits::deg, 100, velocityUnits::pct, false);
+    Top_Right.rotateFor(-amount, rotationUnits::deg, 100, velocityUnits::pct, false);
+    Bottom_Left.rotateFor(amount, rotationUnits::deg, 100, velocityUnits::pct, true);
 }
-void left()
+void left(double amount)
 {
-    Top_Left.rotateFor(-360, rotationUnits::deg, 100, velocityUnits::pct, false);
-    Bottom_Left.rotateFor(360, rotationUnits::deg, 100, velocityUnits::pct, false);
-    Top_Right.rotateFor(360, rotationUnits::deg, 100, velocityUnits::pct, false);
-    Bottom_Left.rotateFor(-360, rotationUnits::deg, 100, velocityUnits::pct, true);
+    Top_Left.rotateFor(-amount, rotationUnits::deg, 100, velocityUnits::pct, false);
+    Bottom_Left.rotateFor(amount, rotationUnits::deg, 100, velocityUnits::pct, false);
+    Top_Right.rotateFor(amount, rotationUnits::deg, 100, velocityUnits::pct, false);
+    Bottom_Left.rotateFor(-amount, rotationUnits::deg, 100, velocityUnits::pct, true);
 }
-int main() {
+void victory_dance()
+{
+    Top_left.startRotateFor(720,rotationUnits::deg,100,velocityUnits::pct);
+    Bottom_left.startRotateFor(720,rotationUnits::deg,100,velocityUnits::pct);
+    Top_right.startRotateFor(720,rotationUnits::deg,100,velocityUnits::pct);
+    Top_right.startRotateFor(720,rotationUnits::deg,100,velocityUnits::pct);
+    Brain.Screen.print("V-I-C-T-O-R-Y--D-A-N-C-E");
+}
+void autonomous()
+{
+    left(20);
+    forward(360);
+    right(105);
+    forward(720);
+    left(45);
+    forward(360);
+    right(75);
+    forward(1080);
+    victory_dance();
+}
+int main() 
+{
+    if(Controller1.ButtonL1.pressed())
+    {
+        autonomous();
+    }
 }
