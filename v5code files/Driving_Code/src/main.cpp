@@ -54,6 +54,21 @@ int main() {
   while(true)
   {
     drive();
+    if (Controller1.ButtonR1.pressing())
+    {
+      Lift_left.spin(directionType::rev);
+      Lift_right.spin(directionType::fwd);
+    }
+    else if (Controller1.ButtonL1.pressing())
+    {
+      Lift_left.spin(directionType::fwd);
+      Lift_right.spin(directionType::rev);
+    }
+    else
+    {
+      Lift_left.stop();
+      Lift_right.stop();
+    }
   }
 }
   
