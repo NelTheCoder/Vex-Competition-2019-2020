@@ -11,10 +11,10 @@
 // Robot Configuration:
 // [Name]               [Type]        [Port(s)]
 // Controller1          controller                    
-// Top_left             motor         11              
+// Top_left             motor         14              
 // Bottom_left          motor         12              
 // Top_right            motor         13              
-// Bottom_right         motor         14              
+// Bottom_right         motor         11              
 // Lift_left            motor         1               
 // Lift_right           motor         2               
 // ---- END VEXCODE CONFIGURED DEVICES ----
