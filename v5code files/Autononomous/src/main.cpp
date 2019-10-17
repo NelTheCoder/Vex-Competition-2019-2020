@@ -16,7 +16,6 @@
 // Top_right            motor         13              
 // Top_left             motor         14              
 // ---- END VEXCODE CONFIGURED DEVICES ----
-
 #include "vex.h"
 
 /*
