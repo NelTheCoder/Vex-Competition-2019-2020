@@ -24,7 +24,6 @@ Set the motors to the correct ports
 */
 void lefty(double amount)
 {
-    
     Top_left.rotateFor(amount, rotationUnits::deg, 100, velocityUnits::pct, false);
     Bottom_left.rotateFor(amount, rotationUnits::deg, 100, velocityUnits::pct, false);
     Top_right.rotateFor(amount, rotationUnits::deg, 100, velocityUnits::pct, false);
@@ -83,7 +82,7 @@ int main()
         }
         else if(Controller1.ButtonRight.pressing())
         {
-            righty(360);
+            righty(541);
             task::sleep(100);
         }
         else if(Controller1.ButtonLeft.pressing())
