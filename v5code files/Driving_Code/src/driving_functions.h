@@ -10,11 +10,13 @@ void lift()
   {
     Lift_left.spin(directionType::fwd, 100, velocityUnits::pct);
     Lift_right.spin(directionType::fwd, 100, velocityUnits::pct);
+    Lift_extra.spin(directionType::fwd, 100, velocityUnits::pct);
   }
   if(Controller1.ButtonL1.pressing())
   {
-    Lift_left.spin(directionType::fwd, -100, velocityUnits::pct);
-    Lift_right.spin(directionType::fwd, -100, velocityUnits::pct);
+    Lift_left.spin(directionType::rev, 100, velocityUnits::pct);
+    Lift_right.spin(directionType::rev, 100, velocityUnits::pct);
+    Lift_extra.spin(directionType::rev, 100, velocityUnits::pct);
   }
 }
 

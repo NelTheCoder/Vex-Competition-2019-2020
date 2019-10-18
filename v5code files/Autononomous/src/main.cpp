@@ -43,12 +43,12 @@ int main()
         }
         else if(Controller1.ButtonRight.pressing())
         {
-            righty(541);
+            righty(90);
             task::sleep(100);
         }
         else if(Controller1.ButtonLeft.pressing())
         {
-            lefty(541);
+            lefty(90);
             task::sleep(100);
         }
         else if(Controller1.ButtonDown.pressing())
@@ -58,4 +58,3 @@ int main()
         }
     }
 }
-

@@ -17,9 +17,8 @@
 // Bottom_right         motor         11              
 // Lift_left            motor         1               
 // Lift_right           motor         2               
-// ---- END VEXCODE CONFIGURED DEVICES ----          
-
-#include "vex.h"
+// Lift_extra           motor         3               
+// ---- END VEXCODE CONFIGURED DEVICES ----
 #include "driving_functions.h"
 
 using namespace vex;
