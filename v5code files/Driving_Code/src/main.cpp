@@ -17,9 +17,10 @@
 // Bottom_right         motor         11              
 // Lift_left            motor         1               
 // Lift_right           motor         2               
-// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- END VEXCODE CONFIGURED DEVICES ----          
 
 #include "vex.h"
+#include "lift_testing.h"
 
 using namespace vex;
 
@@ -53,22 +54,7 @@ int main() {
   vexcodeInit();
   while(true)
   {
-    drive();
-    if (Controller1.ButtonR1.pressing())
-    {
-      Lift_left.spin(directionType::rev);
-      Lift_right.spin(directionType::fwd);
-    }
-    else if (Controller1.ButtonL1.pressing())
-    {
-      Lift_left.spin(directionType::fwd);
-      Lift_right.spin(directionType::rev);
-    }
-    else
-    {
-      Lift_left.stop();
-      Lift_right.stop();
-    }
+    lift();
   }
 }
   
