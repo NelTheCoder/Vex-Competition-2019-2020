@@ -17,46 +17,8 @@
 // Top_left             motor         14              
 // ---- END VEXCODE CONFIGURED DEVICES ----
 #include "vex.h"
+#include "Autononomous_Commands.h"
 
-/*
-Set the motors to the correct ports
-*/
-void lefty(double amount)
-{
-    Top_left.rotateFor(amount, rotationUnits::deg, 100, velocityUnits::pct, false);
-    Bottom_left.rotateFor(amount, rotationUnits::deg, 100, velocityUnits::pct, false);
-    Top_right.rotateFor(amount, rotationUnits::deg, 100, velocityUnits::pct, false);
-    Bottom_left.rotateFor(amount, rotationUnits::deg, 100, velocityUnits::pct, true);
-}
-void backwardy(double amount)
-{
-    Top_left.rotateFor(-amount, rotationUnits::deg, 100, velocityUnits::pct, false);
-    Bottom_left.rotateFor(-amount, rotationUnits::deg, 100, velocityUnits::pct, false);
-    Top_right.rotateFor(amount, rotationUnits::deg, 100, velocityUnits::pct, false);
-    Bottom_left.rotateFor(amount, rotationUnits::deg, 100, velocityUnits::pct, true);
-}
-void righty(double amount)
-{
-    Top_left.rotateFor(amount, rotationUnits::deg, 100, velocityUnits::pct, false);
-    Bottom_left.rotateFor(-amount, rotationUnits::deg, 100, velocityUnits::pct, false);
-    Top_right.rotateFor(-amount, rotationUnits::deg, 100, velocityUnits::pct, false);
-    Bottom_left.rotateFor(amount, rotationUnits::deg, 100, velocityUnits::pct, true);
-}
-void forwardy(double amount)
-{
-    Top_left.rotateFor(-amount, rotationUnits::deg, 100, velocityUnits::pct, false);
-    Bottom_left.rotateFor(amount, rotationUnits::deg, 100, velocityUnits::pct, false);
-    Top_right.rotateFor(amount, rotationUnits::deg, 100, velocityUnits::pct, false);
-    Bottom_right.rotateFor(-amount, rotationUnits::deg, 100, velocityUnits::pct, true);
-}
-void victory_dance()
-{
-    Top_left.startRotateFor(720,rotationUnits::deg,100,velocityUnits::pct);
-    Bottom_left.startRotateFor(720,rotationUnits::deg,100,velocityUnits::pct);
-    Top_right.startRotateFor(720,rotationUnits::deg,100,velocityUnits::pct);
-    Bottom_right.startRotateFor(720,rotationUnits::deg,100,velocityUnits::pct);
-    Brain.Screen.print("V-I-C-T-O-R-Y--D-A-N-C-E");
-}
 void autonomous()
 {
     lefty(20);
