@@ -48,7 +48,7 @@ int main()
         }
         else if(Controller1.ButtonLeft.pressing())
         {
-            lefty(360);
+            lefty(541);
             task::sleep(100);
         }
         else if(Controller1.ButtonDown.pressing())

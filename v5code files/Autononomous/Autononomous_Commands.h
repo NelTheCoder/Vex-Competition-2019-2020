@@ -2,8 +2,11 @@
 
 using namespace vex;
 
+double controlboi = 541;
+
 void lefty(double amount)
 {
+    amount = amount * (controlboi/90);
     Top_left.rotateFor(amount, rotationUnits::deg, 100, velocityUnits::pct, false);
     Bottom_left.rotateFor(amount, rotationUnits::deg, 100, velocityUnits::pct, false);
     Top_right.rotateFor(amount, rotationUnits::deg, 100, velocityUnits::pct, false);
@@ -18,6 +21,7 @@ void backwardy(double amount)
 }
 void righty(double amount)
 {
+  amount = amount * (controlboi/90);
     Top_left.rotateFor(amount, rotationUnits::deg, 100, velocityUnits::pct, false);
     Bottom_left.rotateFor(-amount, rotationUnits::deg, 100, velocityUnits::pct, false);
     Top_right.rotateFor(-amount, rotationUnits::deg, 100, velocityUnits::pct, false);
