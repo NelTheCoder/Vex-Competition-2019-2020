@@ -20,40 +20,16 @@
 // ---- END VEXCODE CONFIGURED DEVICES ----          
 
 #include "vex.h"
-#include "lift_testing.h"
+#include "driving_functions.h"
 
 using namespace vex;
-
-void drive()
-{   
-  if(Controller1.Axis1.value() > 10 && Controller1.Axis4.value() > 10)
-  {
-      Top_left.spin(directionType::fwd, (Controller1.Axis1.value() + Controller1.Axis4.value()) / 2, velocityUnits::pct);
-      Bottom_left.spin(directionType::rev, (Controller1.Axis1.value() + Controller1.Axis4.value()) / 2, velocityUnits::pct);
-      Top_right.spin(directionType::fwd, (Controller1.Axis1.value() + Controller1.Axis4.value()) / 2, velocityUnits::pct);
-      Bottom_right.spin(directionType::rev, (Controller1.Axis1.value() + Controller1.Axis4.value()) / 2, velocityUnits::pct);
-  }
-  else if(Controller1.Axis1.value() < -10 && Controller1.Axis4.value() < -10)
-  {
-      Top_left.spin(directionType::fwd, (Controller1.Axis1.value() + Controller1.Axis4.value()) / 2, velocityUnits::pct);
-      Bottom_left.spin(directionType::rev, (Controller1.Axis1.value() + Controller1.Axis4.value()) / 2, velocityUnits::pct);
-      Top_right.spin(directionType::fwd, (Controller1.Axis1.value() + Controller1.Axis4.value()) / 2, velocityUnits::pct);
-      Bottom_right.spin(directionType::rev, (Controller1.Axis1.value() + Controller1.Axis4.value()) / 2, velocityUnits::pct);
-  }
-  else
-  {
-  Bottom_left.spin(directionType::fwd, Controller1.Axis3.value(), velocityUnits::pct);
-  Top_left.spin(directionType::fwd, Controller1.Axis3.value(), velocityUnits::pct);
-  Top_right.spin(directionType::fwd, Controller1.Axis2.value() * -1, velocityUnits::pct);
-  Bottom_right.spin(directionType::fwd, Controller1.Axis2.value() * -1, velocityUnits::pct);
-  }
-}
 
 int main() {
   // Initializing Robot Configuration. DO NOT REMOVE!
   vexcodeInit();
   while(true)
   {
+    drive();
     lift();
   }
 }
