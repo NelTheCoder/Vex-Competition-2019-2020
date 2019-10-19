@@ -18,6 +18,7 @@
 // Lift_left            motor         1               
 // Lift_right           motor         2               
 // Lift_extra           motor         3               
+// claw                 motor         4               
 // ---- END VEXCODE CONFIGURED DEVICES ----
 
 #include "vex.h"
@@ -35,14 +36,38 @@ void pre_auton(void)
 
 void autonomous(void) 
 {
-
+  while(true)
+  {
+    Controller1.ButtonL1.pressed(autonomous);
+    if(Controller1.ButtonUp.pressing())
+    {
+      forwardy(360);
+      task::sleep(100);
+    }
+    else if(Controller1.ButtonRight.pressing())
+    {
+      righty(90);
+      task::sleep(100);
+    }
+    else if(Controller1.ButtonLeft.pressing())
+    {
+      lefty(90);
+      task::sleep(100);
+    }
+    else if(Controller1.ButtonDown.pressing())
+    {
+      backwardy(360);
+      task::sleep(100);
+    }
+  }
 }
-
 void usercontrol(void) 
 {
-  while (1) 
+  while (true) 
   {
-
+    Drive();
+    Lift();
+    Claw();
     wait(20, msec);
   }
 }
@@ -58,8 +83,6 @@ int main()
 
   // Prevent main from exiting with an infinite loop.
   while (true) {
-    drive();
-    lift();
     wait(100, msec);
   }
 }

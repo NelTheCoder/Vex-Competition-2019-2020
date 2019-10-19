@@ -11,6 +11,7 @@ extern motor Bottom_right;
 extern motor Lift_left;
 extern motor Lift_right;
 extern motor Lift_extra;
+extern motor claw;
 
 /**
  * Used to initialize code/tasks/devices added using tools in VEXcode Text.
