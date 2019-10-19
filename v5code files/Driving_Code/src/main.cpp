@@ -18,7 +18,9 @@
 // Lift_left            motor         1               
 // Lift_right           motor         2               
 // Lift_extra           motor         3               
+// claw                 motor         4               
 // ---- END VEXCODE CONFIGURED DEVICES ----
+#include "vex.h"
 #include "driving_functions.h"
 
 using namespace vex;
@@ -28,8 +30,8 @@ int main() {
   vexcodeInit();
   while(true)
   {
-    drive();
-    lift();
+    Drive();
+    Lift();
   }
 }
   
