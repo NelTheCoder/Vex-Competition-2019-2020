@@ -2,13 +2,15 @@
 
 using namespace vex;
 
+bool claw_open = false;
+
 void Claw()
 {
-  if(Controller1.ButtonR2.pressing())
+  if(claw_open)
   {
     claw.spin(directionType::fwd, 100, velocityUnits::pct);
   }
-  else if(Controller1.ButtonL2.pressing())
+  else
   {
     claw.spin(directionType::rev, 100, velocityUnits::pct);
   }
@@ -58,6 +60,7 @@ void Drive()
     Top_right.spin(directionType::fwd, (Controller1.Axis1.value() + Controller1.Axis4.value()) / 2, velocityUnits::pct);
     Bottom_right.spin(directionType::rev, (Controller1.Axis1.value() + Controller1.Axis4.value()) / 2, velocityUnits::pct);
   }
+  //if the driver isn't trying to strafe
   else
   {
     //Driving w/ joysticks. Left joystick controls left 2 wheels, Right joystick controls right 2 wheels.
