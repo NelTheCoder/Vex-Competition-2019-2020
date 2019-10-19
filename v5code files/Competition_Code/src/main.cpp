@@ -8,9 +8,20 @@
 /*----------------------------------------------------------------------------*/
 
 // ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// Controller1          controller                    
+// Top_left             motor         14              
+// Bottom_left          motor         12              
+// Top_right            motor         13              
+// Bottom_right         motor         11              
+// Lift_left            motor         1               
+// Lift_right           motor         2               
+// Lift_extra           motor         3               
 // ---- END VEXCODE CONFIGURED DEVICES ----
 
 #include "vex.h"
+#include "Competition_Commands.h"
 
 using namespace vex;
 
@@ -31,6 +42,7 @@ void usercontrol(void)
 {
   while (1) 
   {
+
     wait(20, msec);
   }
 }
@@ -46,6 +58,8 @@ int main()
 
   // Prevent main from exiting with an infinite loop.
   while (true) {
+    drive();
+    lift();
     wait(100, msec);
   }
 }
