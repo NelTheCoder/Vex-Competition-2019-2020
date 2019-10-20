@@ -4,8 +4,20 @@ using namespace vex;
 
 bool claw_open = false;
 
+void open_claw()
+{
+  claw_open = true;
+}
+
+void close_claw()
+{
+  claw_open = false;
+}
+
 void Claw()
 {
+  Controller1.ButtonR2.pressed(open_claw);
+  Controller1.ButtonL2.pressed(close_claw);
   if(claw_open)
   {
     claw.spin(directionType::fwd, 100, velocityUnits::pct);
@@ -17,19 +29,19 @@ void Claw()
 }
 void Lift()
 {
-  if(Controller1.ButtonR1.pressing())
+  if(Controller1.ButtonL1.pressing())
   {
     //move lift up
-    Lift_left.spin(directionType::fwd, 100, velocityUnits::pct);
-    Lift_right.spin(directionType::fwd, 100, velocityUnits::pct);
-    Lift_extra.spin(directionType::fwd, 100, velocityUnits::pct);
+    Lift_left.spin(directionType::fwd, 80, velocityUnits::pct);
+    Lift_right.spin(directionType::fwd, 80, velocityUnits::pct);
+    Lift_extra.spin(directionType::fwd, 80, velocityUnits::pct);
   }
-  else if(Controller1.ButtonL1.pressing())
+  else if(Controller1.ButtonR1.pressing())
   {
     //move lift down
-    Lift_left.spin(directionType::rev, 100, velocityUnits::pct);
-    Lift_right.spin(directionType::rev, 100, velocityUnits::pct);
-    Lift_extra.spin(directionType::rev, 100, velocityUnits::pct);
+    Lift_left.spin(directionType::rev, 80, velocityUnits::pct);
+    Lift_right.spin(directionType::rev, 80, velocityUnits::pct);
+    Lift_extra.spin(directionType::rev, 80, velocityUnits::pct);
   }
   else
   {
