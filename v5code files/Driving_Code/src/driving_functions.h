@@ -2,9 +2,9 @@
 
 using namespace vex;
 
-bool claw_open = false;
+bool claw_open;
 
-double lift_values = 40;
+double lift_values = 35;
 
 void open_claw()
 {
@@ -31,13 +31,12 @@ void Claw()
   if(claw_open)
   {
     claw.spin(directionType::rev, 100, velocityUnits::pct);
-
   }
-  else
+  else if(!claw_open)
   {
     claw.spin(directionType::fwd, 100, velocityUnits::pct);
   }
-  task::sleep(500);//edit this value; this is very trial error
+  task::sleep(500);//edit this value; this is very trial & error
   claw.stop();
 }
 void Lift()
