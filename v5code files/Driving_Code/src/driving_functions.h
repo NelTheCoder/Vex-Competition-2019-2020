@@ -4,6 +4,8 @@ using namespace vex;
 
 bool claw_open = false;
 
+double lift_values = 40;
+
 void open_claw()
 {
   claw_open = true;
@@ -14,34 +16,45 @@ void close_claw()
   claw_open = false;
 }
 
+void CheckBatteryCapacity()
+{
+  Brain.Screen.clearLine();
+  task::sleep(15);
+  Brain.Screen.newLine();
+  Brain.Screen.print(BatteryCapacity);
+}
+
 void Claw()
 {
   Controller1.ButtonR2.pressed(open_claw);
   Controller1.ButtonL2.pressed(close_claw);
   if(claw_open)
   {
-    claw.spin(directionType::fwd, 100, velocityUnits::pct);
+    claw.spin(directionType::rev, 100, velocityUnits::pct);
+
   }
   else
   {
-    claw.spin(directionType::rev, 100, velocityUnits::pct);
+    claw.spin(directionType::fwd, 100, velocityUnits::pct);
   }
+  task::sleep(500);//edit this value; this is very trial error
+  claw.stop();
 }
 void Lift()
 {
-  if(Controller1.ButtonL1.pressing())
+  if(Controller1.ButtonR1.pressing())
   {
     //move lift up
-    Lift_left.spin(directionType::fwd, 80, velocityUnits::pct);
-    Lift_right.spin(directionType::fwd, 80, velocityUnits::pct);
-    Lift_extra.spin(directionType::fwd, 80, velocityUnits::pct);
+    Lift_left.spin(directionType::fwd, lift_values, velocityUnits::pct);
+    Lift_right.spin(directionType::fwd, lift_values, velocityUnits::pct);
+    Lift_extra.spin(directionType::fwd, lift_values, velocityUnits::pct);
   }
-  else if(Controller1.ButtonR1.pressing())
+  else if(Controller1.ButtonL1.pressing())
   {
     //move lift down
-    Lift_left.spin(directionType::rev, 80, velocityUnits::pct);
-    Lift_right.spin(directionType::rev, 80, velocityUnits::pct);
-    Lift_extra.spin(directionType::rev, 80, velocityUnits::pct);
+    Lift_left.spin(directionType::rev, lift_values, velocityUnits::pct);
+    Lift_right.spin(directionType::rev, lift_values, velocityUnits::pct);
+    Lift_extra.spin(directionType::rev, lift_values, velocityUnits::pct);
   }
   else
   {
