@@ -41,6 +41,7 @@ void Claw()
 }
 void Lift()
 {
+  
   if(Controller1.ButtonR1.pressing())
   {
     //move lift up
