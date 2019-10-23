@@ -25,15 +25,39 @@
 
 using namespace vex;
 
+bool claw_open;
+
+void open_claw()
+{
+  claw_open = true;
+}
+
+void close_claw()
+{
+  claw_open = false;
+}
+void Claw()
+{
+  if(claw_open)
+  {
+    claw.startRotateFor(directionType::rev, 270, rotationUnits::deg);
+  }
+  else if(!claw_open)
+  {
+    claw.startRotateFor(directionType::fwd, 270, rotationUnits::deg);
+  }
+}
+
 int main() {
   // Initializing Robot Configuration. DO NOT REMOVE!
   vexcodeInit();
   while(true)
   {
+    Controller1.ButtonR2.pressed(open_claw);
+    Controller1.ButtonL2.pressed(close_claw);
     Drive();
     Lift();
-    Claw();
-    CheckBatteryCapacity();
+    Controller1.ButtonR2.pressed(Claw);
+    Controller1.ButtonL2.pressed(Claw);
   }
 }
-  
