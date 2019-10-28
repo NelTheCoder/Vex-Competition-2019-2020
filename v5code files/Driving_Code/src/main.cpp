@@ -10,54 +10,29 @@
 // ---- START VEXCODE CONFIGURED DEVICES ----
 // Robot Configuration:
 // [Name]               [Type]        [Port(s)]
-// Controller1          controller                    
 // Top_left             motor         14              
 // Bottom_left          motor         12              
 // Top_right            motor         13              
 // Bottom_right         motor         11              
 // Lift_left            motor         1               
 // Lift_right           motor         2               
-// Lift_extra           motor         3               
 // claw                 motor         15              
+// Controller1          controller                    
 // ---- END VEXCODE CONFIGURED DEVICES ----
 #include "vex.h"
 #include "driving_functions.h"
 
 using namespace vex;
 
-bool claw_open;
-
-void open_claw()
-{
-  claw_open = true;
-}
-
-void close_claw()
-{
-  claw_open = false;
-}
-void Claw()
-{
-  if(claw_open)
-  {
-    claw.startRotateFor(directionType::rev, 270, rotationUnits::deg);
-  }
-  else if(!claw_open)
-  {
-    claw.startRotateFor(directionType::fwd, 270, rotationUnits::deg);
-  }
-}
-
 int main() {
   // Initializing Robot Configuration. DO NOT REMOVE!
   vexcodeInit();
   while(true)
   {
-    Controller1.ButtonR2.pressed(open_claw);
-    Controller1.ButtonL2.pressed(close_claw);
     Drive();
     Lift();
     Controller1.ButtonR2.pressed(Claw);
-    Controller1.ButtonL2.pressed(Claw);
+    Controller1.ButtonL2.pressed(Set_hold_lift_position);
+    Hold_lift_position();
   }
 }
