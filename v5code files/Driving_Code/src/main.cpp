@@ -29,10 +29,10 @@ int main() {
   vexcodeInit();
   while(true)
   {
-    Drive();
+    Lift_left.setMaxTorque(75, percentUnits::pct);
+    Lift_right.setMaxTorque(75, percentUnits::pct);
+    //Drive();
     Lift();
     Controller1.ButtonR2.pressed(Claw);
-    Controller1.ButtonL2.pressed(Set_hold_lift_position);
-    Hold_lift_position();
   }
 }

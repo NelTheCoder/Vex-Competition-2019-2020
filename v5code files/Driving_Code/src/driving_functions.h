@@ -6,15 +6,14 @@ using namespace vex;
 
 /*VARIABLES*/
 
-double lift_speed = 35;
-
-double lift_hold_position_value = 0;
+double lift_speed = 50;
 
 bool claw_open = true;
 
 bool lift_hold_position_value_set = false;
 
 /*FUNCTIONS*/
+
 
 void Set_hold_lift_position()
 {
@@ -25,9 +24,10 @@ void Set_hold_lift_position()
   else
   {
     lift_hold_position_value_set = true;
-    lift_hold_position_value = (Lift_left.rotation(rotationUnits::raw) + Lift_right.rotation(rotationUnits::raw))/2;
   }
 }
+
+/*
 
 void Hold_lift_position()
 {
@@ -35,10 +35,18 @@ void Hold_lift_position()
   {
     if(((Lift_left.rotation(rotationUnits::raw) + Lift_right.rotation(rotationUnits::raw))/2) < lift_hold_position_value)
     {
-      Lift_left.startRotateFor(directionType::fwd, 1, rotationUnits::raw);
+      Lift_left.spin(directionType::fwd, lift_speed, velocityUnits::pct);
+      Lift_right.spin(directionType::fwd, lift_speed, velocityUnits::pct);
     }
-  }  
+    else
+    {
+      Lift_left.stop();
+      Lift_right.stop();
+    }
+  }
 }
+*/
+
 void Claw()
 {
   if(claw_open)
@@ -55,28 +63,28 @@ void Claw()
 
 void Lift()
 {
- 
   if(Controller1.ButtonR1.pressing())
   {
     //move lift up
     Lift_left.spin(directionType::fwd, lift_speed, velocityUnits::pct);
     Lift_right.spin(directionType::fwd, lift_speed, velocityUnits::pct);
+    /*while(Lift_left.velocity(velocityUnits::rpm) < 0 && Lift_right.velocity(velocityUnits::rpm) < 0)
+    {
+      Lift_left.stop();
+      Lift_right.stop();
+    }*/
   }
   else if(Controller1.ButtonL1.pressing())
   {
     //move lift down
-    Lift_left.setMaxTorque(20, percentUnits::pct);
-    Lift_right.setMaxTorque(20, percentUnits::pct);
-    Lift_left.spin(directionType::fwd, lift_speed, velocityUnits::pct);
-    Lift_right.spin(directionType::fwd, lift_speed, velocityUnits::pct);
-    Lift_left.setMaxTorque(100, percentUnits::pct);
-    Lift_right.setMaxTorque(100, percentUnits::pct);
+    Lift_left.spin(directionType::rev, 15, velocityUnits::pct);
+    Lift_right.spin(directionType::rev, 15, velocityUnits::pct);
   }
   else
   {
-    //stahp all lift motors
-    Lift_left.stop();
-    Lift_right.stop();
+    //if no input; v e r y slowly go up;
+    Lift_left.spin(directionType::fwd, 5, velocityUnits::pct);
+    Lift_right.spin(directionType::fwd, 5, velocityUnits::pct);
   }
 }
 //driving code
