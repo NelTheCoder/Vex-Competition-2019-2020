@@ -14,7 +14,7 @@ motor Top_right = motor(PORT13, ratio18_1, false);
 motor Bottom_right = motor(PORT11, ratio18_1, false);
 motor Lift_left = motor(PORT1, ratio36_1, true);
 motor Lift_right = motor(PORT2, ratio36_1, false);
-motor claw = motor(PORT15, ratio36_1, false);
+motor claw = motor(PORT20, ratio36_1, false);
 controller Controller1 = controller(primary);
 
 // VEXcode generated functions

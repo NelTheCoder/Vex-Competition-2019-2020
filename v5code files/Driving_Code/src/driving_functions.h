@@ -6,26 +6,13 @@ using namespace vex;
 
 /*VARIABLES*/
 
-double lift_speed = 50;
+double lift_speed = 35;
 
 bool claw_open = true;
 
 bool lift_hold_position_value_set = false;
 
 /*FUNCTIONS*/
-
-
-void Set_hold_lift_position()
-{
-  if(lift_hold_position_value_set)
-  {
-    lift_hold_position_value_set = false;
-  }
-  else
-  {
-    lift_hold_position_value_set = true;
-  }
-}
 
 /*
 
@@ -61,30 +48,30 @@ void Claw()
   }
 }
 
-void Lift()
+void Lift()//leave notes neil!!!
 {
   if(Controller1.ButtonR1.pressing())
   {
-    //move lift up
-    Lift_left.spin(directionType::fwd, lift_speed, velocityUnits::pct);
-    Lift_right.spin(directionType::fwd, lift_speed, velocityUnits::pct);
-    /*while(Lift_left.velocity(velocityUnits::rpm) < 0 && Lift_right.velocity(velocityUnits::rpm) < 0)
+    if (((Lift_left.rotation(rotationUnits::deg) + Lift_right.rotation(rotationUnits::deg)) / 2) < 600)// for max height... ?
     {
-      Lift_left.stop();
-      Lift_right.stop();
-    }*/
+      Lift_left.spin(directionType::fwd, lift_speed, velocityUnits::pct);
+      Lift_right.spin(directionType::fwd, lift_speed, velocityUnits::pct);
+    }
+    else 
+    {
+      Lift_left.stop(brakeType::hold);
+      Lift_right.stop(brakeType::hold);//stoping lift
+    }
   }
   else if(Controller1.ButtonL1.pressing())
   {
-    //move lift down
-    Lift_left.spin(directionType::rev, 15, velocityUnits::pct);
-    Lift_right.spin(directionType::rev, 15, velocityUnits::pct);
+    Lift_left.spin(directionType::rev, lift_speed, velocityUnits::pct);
+    Lift_right.spin(directionType::rev, lift_speed, velocityUnits::pct);
   }
   else
   {
-    //if no input; v e r y slowly go up;
-    Lift_left.spin(directionType::fwd, 5, velocityUnits::pct);
-    Lift_right.spin(directionType::fwd, 5, velocityUnits::pct);
+    Lift_left.stop(brakeType::hold);
+    Lift_right.stop(brakeType::hold);
   }
 }
 //driving code

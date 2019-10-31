@@ -16,7 +16,7 @@
 // Bottom_right         motor         11              
 // Lift_left            motor         1               
 // Lift_right           motor         2               
-// claw                 motor         15              
+// claw                 motor         20              
 // Controller1          controller                    
 // ---- END VEXCODE CONFIGURED DEVICES ----
 #include "vex.h"
@@ -29,10 +29,12 @@ int main() {
   vexcodeInit();
   while(true)
   {
-    Lift_left.setMaxTorque(75, percentUnits::pct);
-    Lift_right.setMaxTorque(75, percentUnits::pct);
-    //Drive();
+    Lift_left.setMaxTorque(70, percentUnits::pct);
+    Lift_right.setMaxTorque(70, percentUnits::pct);
+    Drive();
     Lift();
     Controller1.ButtonR2.pressed(Claw);
+    Brain.Screen.clearLine();
+    Brain.Screen.print((Lift_left.rotation(rotationUnits::deg) + Lift_right.rotation(rotationUnits::deg)) / 2);
   }
 }
