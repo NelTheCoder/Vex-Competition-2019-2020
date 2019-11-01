@@ -25,14 +25,12 @@
 using namespace vex;
 
 int main() {
-  Brain.Screen.print("sksksksksk and i oop");
-  Brain.Screen.print("sksksksksk and i oop 2");
   // Initializing Robot Configuration. DO NOT REMOVE!
   vexcodeInit();
   while(true)
   {
-    Lift_left.setMaxTorque(70, percentUnits::pct);
-    Lift_right.setMaxTorque(70, percentUnits::pct);
+    Lift_left.setMaxTorque(85, percentUnits::pct);
+    Lift_right.setMaxTorque(85, percentUnits::pct);
     Drive();
     Lift();
     Controller1.ButtonR2.pressed(Claw);
