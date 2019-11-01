@@ -52,7 +52,7 @@ void Lift()//leave notes neil!!!
 {
   if(Controller1.ButtonR1.pressing())
   {
-    if (((Lift_left.rotation(rotationUnits::deg) + Lift_right.rotation(rotationUnits::deg)) / 2) < 600)// for max height... ?
+    if (((Lift_left.rotation(rotationUnits::deg) + Lift_right.rotation(rotationUnits::deg)) / 2) < 650)
     {
       Lift_left.spin(directionType::fwd, lift_speed, velocityUnits::pct);
       Lift_right.spin(directionType::fwd, lift_speed, velocityUnits::pct);
@@ -60,7 +60,7 @@ void Lift()//leave notes neil!!!
     else 
     {
       Lift_left.stop(brakeType::hold);
-      Lift_right.stop(brakeType::hold);//stoping lift
+      Lift_right.stop(brakeType::hold);//stoping lift 
     }
   }
   else if(Controller1.ButtonL1.pressing())
