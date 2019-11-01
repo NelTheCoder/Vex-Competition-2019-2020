@@ -10,18 +10,20 @@ double lift_speed = 35;
 
 bool claw_open = true;
 
+double claw_value = 250;
+
 /*FUNCTIONS*/
 
 void Claw()
 {
   if(claw_open)
   {
-    claw.startRotateFor(directionType::rev, 180, rotationUnits::deg);
+    claw.startRotateFor(directionType::rev, claw_value, rotationUnits::deg);
     claw_open = false;
   }
   else if(!claw_open)
   {
-    claw.startRotateFor(directionType::fwd, 180, rotationUnits::deg);
+    claw.startRotateFor(directionType::fwd, claw_value, rotationUnits::deg);
     claw_open = true;
   }
 }
@@ -45,6 +47,16 @@ void Lift()
   {
     Lift_left.spin(directionType::rev, lift_speed, velocityUnits::pct);
     Lift_right.spin(directionType::rev, lift_speed, velocityUnits::pct);
+  }
+  else if(Controller1.ButtonLeft.pressing())
+  {
+    Lift_left.spin(directionType::fwd, lift_speed, velocityUnits::pct);
+    Lift_right.stop(brakeType::hold);
+  }
+  else if(Controller1.ButtonRight.pressing())
+  {
+    Lift_right.spin(directionType::fwd, lift_speed, velocityUnits::pct);
+    Lift_left.stop(brakeType::hold);
   }
   else
   {

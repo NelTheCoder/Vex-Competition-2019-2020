@@ -24,17 +24,19 @@
 
 using namespace vex;
 
+double torque_value = 70;
+
 int main() {
   // Initializing Robot Configuration. DO NOT REMOVE!
   vexcodeInit();
   while(true)
   {
-    Lift_left.setMaxTorque(85, percentUnits::pct);
-    Lift_right.setMaxTorque(85, percentUnits::pct);
+    Lift_left.setMaxTorque(70, percentUnits::pct);
+    Lift_right.setMaxTorque(70, percentUnits::pct);
     Drive();
     Lift();
     Controller1.ButtonR2.pressed(Claw);
     Brain.Screen.clearLine();
-    Brain.Screen.print((Lift_left.rotation(rotationUnits::deg) + Lift_right.rotation(rotationUnits::deg)) / 2);
+    Brain.Screen.print("she was looking kind of dumbS");
   }
 }
