@@ -6,33 +6,35 @@ using namespace vex;
 
 /*VARIABLES*/
 
+//speed lift moves at
 double lift_speed = 35;
 
-bool claw_open = true;
+bool claw_open = false;
 
-double claw_value = 250;
+double claw_value = 200;
 
 /*FUNCTIONS*/
 
-void Claw()
+
+void Claw_Open()
 {
-  if(claw_open)
-  {
-    claw.startRotateFor(directionType::rev, claw_value, rotationUnits::deg);
-    claw_open = false;
-  }
-  else if(!claw_open)
-  {
-    claw.startRotateFor(directionType::fwd, claw_value, rotationUnits::deg);
-    claw_open = true;
-  }
+  claw.startRotateFor(directionType::fwd, claw_value, rotationUnits::deg);
 }
+
+
+void Claw_Close()
+{
+  claw.startRotateFor(directionType::rev, claw_value, rotationUnits::deg);
+}
+
 
 void Lift()
 {
   if(Controller1.ButtonR1.pressing())
   {
-    if (((Lift_left.rotation(rotationUnits::deg) + Lift_right.rotation(rotationUnits::deg)) / 2) < 650)
+    Lift_left.setMaxTorque(80, percentUnits::pct);
+    Lift_right.setMaxTorque(80, percentUnits::pct);
+    if (((Lift_left.rotation(rotationUnits::deg) + Lift_right.rotation(rotationUnits::deg)) / 2) < 750)
     {
       Lift_left.spin(directionType::fwd, lift_speed, velocityUnits::pct);
       Lift_right.spin(directionType::fwd, lift_speed, velocityUnits::pct);
@@ -45,18 +47,20 @@ void Lift()
   }
   else if(Controller1.ButtonL1.pressing())
   {
+    Lift_left.setMaxTorque(70, percentUnits::pct);
+    Lift_right.setMaxTorque(70, percentUnits::pct);
     Lift_left.spin(directionType::rev, lift_speed, velocityUnits::pct);
     Lift_right.spin(directionType::rev, lift_speed, velocityUnits::pct);
   }
   else if(Controller1.ButtonLeft.pressing())
   {
-    Lift_left.spin(directionType::fwd, lift_speed, velocityUnits::pct);
-    Lift_right.stop(brakeType::hold);
+    Lift_left.spin(directionType::rev, lift_speed, percentUnits::pct);
+    Lift_right.stop();
   }
   else if(Controller1.ButtonRight.pressing())
   {
-    Lift_right.spin(directionType::fwd, lift_speed, velocityUnits::pct);
-    Lift_left.stop(brakeType::hold);
+    Lift_right.spin(directionType::rev, lift_speed, percentUnits::pct);
+    Lift_left.stop();
   }
   else
   {
@@ -71,7 +75,7 @@ void Drive()
   //strafing
   //axis 4 is left joystick, axis 1 is right joystick
   //if both joysticks are right, strafe right
-  if(Controller1.Axis1.value() > 10 && Controller1.Axis4.value() > 10)
+  if(Controller1.Axis1.value() > 25 && Controller1.Axis4.value() > 25)
   {
     Top_left.spin(directionType::rev, (Controller1.Axis1.value() + Controller1.Axis4.value()) / 2, velocityUnits::pct);
     Bottom_left.spin(directionType::fwd, (Controller1.Axis1.value() + Controller1.Axis4.value()) / 2, velocityUnits::pct);
@@ -79,7 +83,7 @@ void Drive()
     Bottom_right.spin(directionType::fwd, (Controller1.Axis1.value() + Controller1.Axis4.value()) / 2, velocityUnits::pct);
   }
   //if both joysticks are left, strafe left
-  else if(Controller1.Axis1.value() < -10 && Controller1.Axis4.value() < -10)
+  else if(Controller1.Axis1.value() < -25 && Controller1.Axis4.value() < -25)
   {
     Top_left.spin(directionType::rev, (Controller1.Axis1.value() + Controller1.Axis4.value()) / 2, velocityUnits::pct);
     Bottom_left.spin(directionType::fwd, (Controller1.Axis1.value() + Controller1.Axis4.value()) / 2, velocityUnits::pct);
