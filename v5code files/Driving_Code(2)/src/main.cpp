@@ -60,6 +60,7 @@ void pre_auton(void) {
 /*---------------------------------------------------------------------------*/
 
 void autonomous(void) {
+  /*OG AUTONOMOUS
   //go backwards
   Top_left.startRotateFor(directionType::fwd, 500, rotationUnits::deg);
   Bottom_left.startRotateFor(directionType::fwd, 500, rotationUnits::deg);
@@ -68,7 +69,12 @@ void autonomous(void) {
   //open lift 
   Lift_left.startRotateFor(directionType::fwd, 360, rotationUnits::deg);
   Lift_right.startRotateFor(directionType::fwd, 360, rotationUnits::deg);
-
+  //go back forwards
+  Top_left.startRotateFor(directionType::rev, 500, rotationUnits::deg);
+  Bottom_left.startRotateFor(directionType::rev, 500, rotationUnits::deg);
+  Top_right.startRotateFor(directionType::fwd, 500, rotationUnits::deg);
+  Bottom_right.rotateFor(directionType::fwd, 500, rotationUnits::deg);
+  */
 }
 
 /*---------------------------------------------------------------------------*/
