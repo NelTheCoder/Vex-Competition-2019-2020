@@ -8,6 +8,9 @@
 /*----------------------------------------------------------------------------*/
 
 // ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// Vision               vision        1               
 // ---- END VEXCODE CONFIGURED DEVICES ----
 
 #include "vex.h"
