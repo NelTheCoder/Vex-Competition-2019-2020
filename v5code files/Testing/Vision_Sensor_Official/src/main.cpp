@@ -1,16 +1,19 @@
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*    Module:       main.cpp                                                  */
-/*    Author:       C:\Users\neiln                                            */
-/*    Created:      Mon Nov 04 2019                                           */
+/*    Author:       VEX                                                       */
+/*    Created:      Fri Sep 27 2019                                           */
 /*    Description:  V5 project                                                */
+/*                                                                            */
+/*    This project will detect 3 different colored objects and display        */
+/*    when each object is found on the V5 Brain's screen.                     */
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
 // ---- START VEXCODE CONFIGURED DEVICES ----
 // Robot Configuration:
 // [Name]               [Type]        [Port(s)]
-// Vision               vision        10              
+// Vision5              vision        5
 // ---- END VEXCODE CONFIGURED DEVICES ----
 
 #include "vex.h"
@@ -21,29 +24,29 @@ event checkRed = event();
 event checkBlue = event();
 event checkGreen = event();
 
-void hasPurpleCallback() {
+void hasBlueCallback() {
   Brain.Screen.setFont(mono40);
   Brain.Screen.clearLine(1, black);
   Brain.Screen.setCursor(Brain.Screen.row(), 1);
   Brain.Screen.setCursor(1, 1);
-  Vision.takeSnapshot(Vision__PURPLE_CUBE);
-  if (Vision.objectCount > 0) {
-    Brain.Screen.print("Purple Cube Found");
+  Vision5.takeSnapshot(Vision5__BLUEBOX);
+  if (Vision5.objectCount > 0) {
+    Brain.Screen.print("Blue Object Found");
   } else {
-    Brain.Screen.print("No Purple Cube");
+    Brain.Screen.print("No Blue Object");
   }
 }
 
-void hasOrangeCallback() {
+void hasRedCallback() {
   Brain.Screen.setFont(mono40);
   Brain.Screen.clearLine(3, black);
   Brain.Screen.setCursor(Brain.Screen.row(), 1);
   Brain.Screen.setCursor(3, 1);
-  Vision.takeSnapshot(Vision__ORANGE_CUBE);
-  if (Vision.objectCount > 0) {
-    Brain.Screen.print("Orange Cube Found");
+  Vision5.takeSnapshot(Vision5__REDBOX);
+  if (Vision5.objectCount > 0) {
+    Brain.Screen.print("Red Object Found");
   } else {
-    Brain.Screen.print("No Orange Cube");
+    Brain.Screen.print("No Red Object");
   }
 }
 
@@ -52,11 +55,11 @@ void hasGreenCallback() {
   Brain.Screen.clearLine(5, black);
   Brain.Screen.setCursor(Brain.Screen.row(), 1);
   Brain.Screen.setCursor(5, 1);
-  Vision.takeSnapshot(Vision__GREEN_CUBE);
-  if (Vision.objectCount > 0) {
-    Brain.Screen.print("Green Cube Found");
+  Vision5.takeSnapshot(Vision5__GREENBOX);
+  if (Vision5.objectCount > 0) {
+    Brain.Screen.print("Green Object Found");
   } else {
-    Brain.Screen.print("No Green Cube");
+    Brain.Screen.print("No Green Object");
   }
 }
 
@@ -64,8 +67,8 @@ int main() {
   // Initializing Robot Configuration. DO NOT REMOVE!
   vexcodeInit();
 
-  checkBlue(hasPurpleCallback);
-  checkRed(hasOrangeCallback);
+  checkBlue(hasBlueCallback);
+  checkRed(hasRedCallback);
   checkGreen(hasGreenCallback);
   
   while (true) {
