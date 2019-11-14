@@ -1,0 +1,247 @@
+//MAIN.CPP
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*    Module:       main.cpp                                                  */
+/*    Author:       C:\Users\25krugercharles                                  */
+/*    Created:      Mon Nov 04 2019                                           */
+/*    Description:  V5 project                                                */
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
+
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// Controller1          controller                    
+// Top_left             motor         11              
+// Bottom_left          motor         13              
+// Top_right            motor         12              
+// Bottom_right         motor         14              
+// Lift_left            motor         1               
+// Lift_right           motor         2               
+// claw                 motor         20              
+// vacuum_left          motor         3               
+// vacuum_right         motor         4               
+// scan_thing           pot           A               
+// ---- END VEXCODE CONFIGURED DEVICES ----
+
+#include "vex.h"
+#include "Lift_Functions.h"
+
+using namespace vex;
+
+int main() {
+  // Initializing Robot Configuration. DO NOT REMOVE!
+  vexcodeInit();
+  while(true) 
+  {
+  Brain.Screen.print("Change da world");
+  Brain.Screen.newLine();
+  Brain.Screen.print("My final message. Goodb ye");
+  }
+}
+
+//ROBOT-COFIG.CPP
+
+#include "vex.h"
+
+using namespace vex;
+using signature = vision::signature;
+using code = vision::code;
+
+// A global instance of brain used for printing to the V5 Brain screen
+brain  Brain;
+
+// VEXcode device constructors
+controller Controller1 = controller(primary);
+motor Top_left = motor(PORT11, ratio18_1, false);
+motor Bottom_left = motor(PORT13, ratio18_1, false);
+motor Top_right = motor(PORT12, ratio18_1, false);
+motor Bottom_right = motor(PORT14, ratio18_1, false);
+motor Lift_left = motor(PORT1, ratio36_1, false);
+motor Lift_right = motor(PORT2, ratio36_1, false);
+motor claw = motor(PORT20, ratio36_1, false);
+motor vacuum_left = motor(PORT3, ratio18_1, false);
+motor vacuum_right = motor(PORT4, ratio18_1, false);
+pot scan_thing = pot(Brain.ThreeWirePort.A);
+
+// VEXcode generated functions
+
+
+
+/**
+ * Used to initialize code/tasks/devices added using tools in VEXcode Text.
+ * 
+ * This should be called at the start of your int main function.
+ */
+void vexcodeInit( void ) {
+  // nothing to initialize
+}
+
+//DRIVING_FUNCTIONS.CPP
+
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*    Module:       main.cpp                                                  */
+/*    Author:       C:\Users\25krugercharles                                  */
+/*    Created:      Mon Nov 04 2019                                           */
+/*    Description:  V5 project                                                */
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
+
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// ---- END VEXCODE CONFIGURED DEVICES ----
+
+#include "vex.h"
+
+using namespace vex;
+
+void Drive()
+{
+  //strafing 
+  //axis 4 is left joystick, axis 1 is right joystick
+  //if both joysticks are right, strafe right
+  if(Controller1.Axis1.value() > 25 && Controller1.Axis4.value() > 25)
+  {
+    Top_left.spin(directionType::rev, (Controller1.Axis1.value() + Controller1.Axis4.value()) / 2, velocityUnits::pct);
+    Bottom_left.spin(directionType::fwd, (Controller1.Axis1.value() + Controller1.Axis4.value()) / 2, velocityUnits::pct);
+    Top_right.spin(directionType::rev, (Controller1.Axis1.value() + Controller1.Axis4.value()) / 2, velocityUnits::pct);
+    Bottom_right.spin(directionType::fwd, (Controller1.Axis1.value() + Controller1.Axis4.value()) / 2, velocityUnits::pct);
+  }
+  //if both joysticks are left, strafe left
+  else if(Controller1.Axis1.value() < -25 && Controller1.Axis4.value() < -25)
+  {
+    Top_left.spin(directionType::rev, (Controller1.Axis1.value() + Controller1.Axis4.value()) / 2, velocityUnits::pct);
+    Bottom_left.spin(directionType::fwd, (Controller1.Axis1.value() + Controller1.Axis4.value()) / 2, velocityUnits::pct);
+    Top_right.spin(directionType::rev, (Controller1.Axis1.value() + Controller1.Axis4.value()) / 2, velocityUnits::pct);
+    Bottom_right.spin(directionType::fwd, (Controller1.Axis1.value() + Controller1.Axis4.value()) / 2, velocityUnits::pct);
+  }
+  //if the driver isn't trying to strafe
+  else
+  {
+    //Driving w/ joysticks. Left joystick controls left 2 wheels, Right joystick controls right 2 wheels.
+    //Axis 3 is left joystick, Axis 2 is right joystick 
+    Bottom_left.spin(directionType::rev, Controller1.Axis2.value(), velocityUnits::pct);
+    Top_left.spin(directionType::rev, Controller1.Axis2.value(), velocityUnits::pct);
+    Top_right.spin(directionType::fwd, Controller1.Axis3.value(), velocityUnits::pct);
+    Bottom_right.spin(directionType::fwd, Controller1.Axis3.value(), velocityUnits::pct);
+  }
+}
+
+LIFT_FUNCTIONS.CPP
+
+
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*    Module:       main.cpp                                                  */
+/*    Author:       C:\Users\25krugercharles                                  */
+/*    Created:      Mon Nov 04 2019                                           */
+/*    Description:  V5 project                                                */
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
+
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// ---- END VEXCODE CONFIGURED DEVICES ----
+
+#include "vex.h"
+
+using namespace vex;
+
+double lift_speed = 40; //change the  speed of the motors overall
+
+void Lift()
+{
+  if(Controller1.ButtonR1.pressing()) //this is for going up
+  {
+    Lift_left.setMaxTorque(75, percentUnits::pct); //can change the torque for up
+    Lift_right.setMaxTorque(75, percentUnits::pct);
+    if (((Lift_left.rotation(rotationUnits::deg) + Lift_right.rotation(rotationUnits::deg)) / 2) < 750)
+    {
+      Lift_left.spin(directionType::fwd, lift_speed, velocityUnits::pct);
+      Lift_right.spin(directionType::fwd, lift_speed, velocityUnits::pct);
+    }
+    else 
+    {
+      Lift_left.stop(brakeType::hold);
+      Lift_right.stop(brakeType::hold); 
+    }
+  }
+  else if(Controller1.ButtonL1.pressing()) //this is for going down
+  {
+    Lift_left.setMaxTorque(70, percentUnits::pct); //can change the torque for down
+    Lift_right.setMaxTorque(70, percentUnits::pct);
+    Lift_left.spin(directionType::rev, lift_speed, velocityUnits::pct);
+    Lift_right.spin(directionType::rev, lift_speed, velocityUnits::pct);
+  }
+  else if(Controller1.ButtonLeft.pressing())
+  {
+    Lift_left.spin(directionType::rev, lift_speed, percentUnits::pct);
+    Lift_right.stop();
+  }
+  else if(Controller1.ButtonRight.pressing())
+  {
+    Lift_right.spin(directionType::rev, lift_speed, percentUnits::pct);
+    Lift_left.stop();
+  }
+  else
+  {
+    Lift_left.stop(brakeType::hold);
+    Lift_right.stop(brakeType::hold);
+  }
+}
+
+//CLAW_FUNCTIONS.CPP
+
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*    Module:       main.cpp                                                  */
+/*    Author:       C:\Users\25krugercharles                                  */
+/*    Created:      Mon Nov 04 2019                                           */
+/*    Description:  V5 project                                                */
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
+
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// ---- END VEXCODE CONFIGURED DEVICES ----
+
+#include "vex.h"
+
+double claw_value = 200;
+
+using namespace vex;
+
+void Claw_Open()
+{  //claw open
+  claw.startRotateFor(directionType::fwd, claw_value, rotationUnits::deg);
+}
+
+
+void Claw_Close()
+{ //claw close
+  claw.startRotateFor(directionType::rev, claw_value, rotationUnits::deg);
+}
+
+VACUUM_BOT.CPP
+
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*    Module:       main.cpp                                                  */
+/*    Author:       C:\Users\25krugercharles                                  */
+/*    Created:      Mon Nov 04 2019                                           */
+/*    Description:  V5 project                                                */
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
+
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// ---- END VEXCODE CONFIGURED DEVICES ----
+
+#include "vex.h"
+
+using namespace vex;
+
+void Vacuum() {  //vacuum motors spin
+if(Controller1.ButtonL2.pressing()) //owo by noa
+{
+  vacuum_left.spin(directionType::fwd, 40 , percentUnits::pct);
+  vacuum_right.spin(directionType::fwd, 40 , percentUnits::pct);
+}
+}
