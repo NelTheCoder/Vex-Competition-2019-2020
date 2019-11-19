@@ -26,18 +26,53 @@
 
 using namespace vex;
 
+bool alignedWithCube = false;
+
+//bot is ~ 44.3 cm 
+
+//12.59 inches in one rotation
+
+void VacuumAutonomous()
+{
+  //drive forward ~ 13.3858 inches
+  Top_left.startRotateFor(directionType::fwd, 360, rotationUnits::deg);
+  Bottom_left.startRotateFor(directionType::fwd,360, rotationUnits::deg);
+  Top_right.startRotateFor(directionType::rev, 360, rotationUnits::deg);
+  Bottom_right.rotateFor(directionType::rev, 360, rotationUnits::deg);
+  /*use vision sensor to align
+  while(!alignedWithCube)
+  {
+    alignedWithCube = true;
+  }
+  //start vacuum motors
+  //drive forward while picking up cubes ~ 20.625 inches
+  Top_left.startRotateFor(directionType::rev, (20.625/4) * 360, rotationUnits::deg);
+  Bottom_left.startRotateFor(directionType::rev, (20.625/4) * 360, rotationUnits::deg);
+  Top_right.startRotateFor(directionType::fwd, (20.625/4) * 360, rotationUnits::deg);
+  Bottom_right.startRotateFor(directionType::fwd, (20.625/4) * 360, rotationUnits::deg);
+  //rotate to face goal zone ~ 135 degrees
+  Top_left.startRotateFor(directionType::fwd, 270, rotationUnits::deg);
+  Bottom_left.startRotateFor(directionType::fwd, 270, rotationUnits::deg);
+  Top_right.startRotateFor(directionType::rev, 270, rotationUnits::deg);
+  Bottom_right.startRotateFor(directionType::rev, 270, rotationUnits::deg);
+  //drive till very close to goal zone ~ 18.88976 inches
+  Top_left.startRotateFor(directionType::rev, (18.88976/4) * 360, rotationUnits::deg);
+  Bottom_left.startRotateFor(directionType::rev, (18.88976/4) * 360, rotationUnits::deg);
+  Top_right.startRotateFor(directionType::fwd, (18.88976/4) * 360, rotationUnits::deg);
+  Bottom_right.startRotateFor(directionType::fwd, (18.889767/4) * 360, rotationUnits::deg);
+  //drop cubes*/
+}
+
+void LiftAutonomous()
+{
+  //sksksksksk and i oop
+}
+
 int main()
 {
   //stuff
-}
-
-void VaccumAutonomous()
-{
-  //drive forward
-  //use vision sensor to align
-  //start vacuum motors
-  //drive forward while picking up cubes
-  //rotate to face goal zone
-  //drive till very close to goal zone
-  //drop cubes
+  while(true)
+  {
+    Controller1.ButtonL1.pressed(VacuumAutonomous);
+  }
 }
