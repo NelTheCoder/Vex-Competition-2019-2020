@@ -7,36 +7,23 @@
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-// ---- START VEXCODE CONFIGURED DEVICES ----
-// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ---- //
+// ---- END VEXCODE CONFIGURED DEVICES ---- //
 
 #include "vex.h"
 
-double claw_value = 200;
- 
-using namespace vex;
+using namespace vex;  
 
-bool claw_status = false;
-
-void example()
+void Ramp()
 {
-  if(claw_status)
-  {
-    claw.startRotateFor(directionType::rev, claw_value, rotationUnits::deg);
-  }
-  else if(!claw_status)
-  {
-    claw.startRotateFor(directionType::fwd, claw_value, rotationUnits::deg);
-  }
+if(Controller1.ButtonUp.pressing()) //this makes the ramp go up
+{
+ramp.spin(directionType::fwd, 45, percentUnits::pct);
+} 
+else if(Controller1.ButtonDown.pressing()) //this makes the ramp go down
+{
+ramp.spin(directionType::fwd, 45, percentUnits::pct);  
 }
-
-void Claw_Open()
-{  //claw open
-  claw.startRotateFor(directionType::fwd, claw_value, rotationUnits::deg);
 }
 
 
-void Claw_Close()
-{ //claw close
-  claw.startRotateFor(directionType::rev, claw_value, rotationUnits::deg);
-}
