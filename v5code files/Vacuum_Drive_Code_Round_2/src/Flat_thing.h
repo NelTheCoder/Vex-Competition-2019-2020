@@ -7,23 +7,23 @@
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-// ---- START VEXCODE CONFIGURED DEVICES ----
-// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ---- //
+// ---- END VEXCODE CONFIGURED DEVICES ---- //
 
 #include "vex.h"
 
 using namespace vex;  
- 
-void Vacuum() 
-{  //vacuum motors spin
-if(Controller1.ButtonL2.pressing()) //UwU by noa
+
+void Ramp()
 {
-  vacuum_left.spin(directionType::fwd, 45 , percentUnits::pct);
-  vacuum_right.spin(directionType::fwd, 45 , percentUnits::pct);
+if(Controller1.ButtonUp.pressing()) //this makes the ramp go up
+{
+ramp.spin(directionType::fwd, 45, percentUnits::pct);
+} 
+else if(Controller1.ButtonDown.pressing()) //this makes the ramp go down
+{
+ramp.spin(directionType::fwd, 45, percentUnits::pct);  
 }
-else 
-{ //when nothing is happening, the motors stop
- vacuum_left.stop();
- vacuum_right.stop();
 }
-}
+
+

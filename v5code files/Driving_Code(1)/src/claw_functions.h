@@ -12,16 +12,33 @@
 
 #include "vex.h"
 
-using namespace vex;  
+double claw_value = 200;
+ 
+using namespace vex;
 
-void Ramp()
+bool claw_status = true;
+
+void ClawOpenorClose()
 {
-if(Controller1.ButtonUp.pressing()) //this makes the ramp go up
-{
-ramp.spin(directionType::fwd, 75, percentUnits::pct);
-} 
-else if(Controller1.ButtonDown.pressing()) //this makes the ramp go down
-{
-ramp.spin(directionType::fwd, 75, percentUnits::pct);  
+  if(claw_status)
+  {
+    claw.startRotateFor(directionType::rev, claw_value, rotationUnits::deg);
+    claw_status = false;
+  }
+  else if(!claw_status)
+  {
+    claw.startRotateFor(directionType::fwd, claw_value, rotationUnits::deg);
+    claw_status = true;
+  }
 }
+
+void Claw_Open()
+{  //claw open
+  claw.startRotateFor(directionType::fwd, claw_value, rotationUnits::deg);
+}
+
+
+void Claw_Close()
+{ //claw close
+  claw.startRotateFor(directionType::rev, claw_value, rotationUnits::deg);
 }

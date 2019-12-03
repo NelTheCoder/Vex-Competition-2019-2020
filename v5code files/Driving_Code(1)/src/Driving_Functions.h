@@ -7,15 +7,15 @@
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-// ---- START VEXCODE CONFIGURED DEVICES ---- 
+// ---- START VEXCODE CONFIGURED DEVICES ----
 // ---- END VEXCODE CONFIGURED DEVICES ----
 
 #include "vex.h"
 
 using namespace vex;
 
-void Driving()
-{ 
+void Drive() 
+{
   //strafing 
   //axis 4 is left joystick, axis 1 is right joystick
   //if both joysticks are right, strafe right
@@ -46,26 +46,3 @@ void Driving()
   }
 }
 
-void Vacuum() 
-  {  //If Button L2 is pressed down
-  if(Controller1.ButtonL2.pressing())
-  {
-  //spin vaccuum inwards
-    vacuum_left.spin(directionType::fwd, 40 , percentUnits::pct);
-    vacuum_right.spin(directionType::rev, 40 , percentUnits::pct);
-  }
-  //otherwise if Bu tton R2 is pressed down
-  else if (Controller1.ButtonR2.pressing()) 
-  {
-    //shoot cubes out
-    vacuum_left.spin(directionType::rev, 40, percentUnits::pct);
-    vacuum_right.spin(directionType::fwd, 40, percentUnits::pct);
-  }
-  //if you are not attempting to move the motors (pressing Button L2/R2)
-  else 
-  {
-    //hold motor position
-    vacuum_left.stop(brakeType::hold);
-    vacuum_right.stop(brakeType::hold);
-  } 
-}

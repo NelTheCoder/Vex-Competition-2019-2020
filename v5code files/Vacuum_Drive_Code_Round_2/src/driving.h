@@ -67,5 +67,5 @@ void Vacuum()
     //hold motor position
     vacuum_left.stop(brakeType::hold);
     vacuum_right.stop(brakeType::hold);
-  } 
+  }
 }
