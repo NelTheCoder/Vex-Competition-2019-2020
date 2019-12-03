@@ -26,7 +26,7 @@
 #include "vex.h"
 #include "Lift_Functions.h"
 #include "claw_functions.h"
-#include "vacuum_spinnys.h"
+#include "Driving_Functions.h"
 
 using namespace vex;
 
@@ -35,9 +35,9 @@ int main() {
   vexcodeInit();
   while(true) 
   {
-    if(Controller1.ButtonUp.pressing() && Controller1.ButtonA.pressing())
+    if(Controller1.ButtonLeft.pressing() && Controller1.ButtonA.pressing())
     {
-      //all motors stop
+      //all motors stop if you press the left button and the a button
       Top_left.stop();
       Top_right.stop();
       Bottom_left.stop();
@@ -46,7 +46,7 @@ int main() {
       Lift_right.stop();
       claw.stop();
 
-      task::sleep(1000); //the motors wait 1 second
+      task::sleep(999); //the motors wait 1 second
 
 
       //the motors run for a little bit then you can control it again
@@ -58,12 +58,9 @@ int main() {
       Lift_right.spin(fwd, 10, velocityUnits::pct);
       claw.spin(fwd, 10, velocityUnits::pct);
 
-    
+    //this is the failsafe, when you click the up arrow and the A button all motors stop, you wait one second, then the motors run for a litle bit and then you have control again
 
     }
-  //Brain.Screen.print("You were expecting Charlie, but it was I, DIO");
-  //Brain.Screen.newLine();
-  //Brain.Screen.print("ok");
+
   }
 }
-//just so this code is n i c e ;)
