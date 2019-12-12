@@ -1,0 +1,38 @@
+
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*    Module:       main.cpp                                                  */
+/*    Author:       C:\Users\25krugercharles                                  */
+/*    Created:      Mon Nov 04 2019                                           */
+/*    Description:  V5 project                                                */
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
+
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// ---- END VEXCODE CONFIGURED DEVICES ----
+
+#include "vex.h"
+ 
+using namespace vex;
+
+double lift_speed = 40; //change the  speed of the motors overall
+
+void Lift()
+{
+// loop forever to always update the information displayed on the screen
+while(1) {
+    Brain.Screen.clearScreen();
+    
+    // display the potentiometer rotation value on the screen
+    //"pot" is the declared name for the potentiometer
+    Brain.Screen.printAt(1, 20, "rotation: %f degrees", pot.value(rotationUnits::deg));
+
+    // display the potentiometer percent value on the screen
+    Brain.Screen.printAt(1, 40, "percent: %f %%", pot.value(percentUnits::pct));
+    
+    // display the potentiometer analog value on the screen
+    Brain.Screen.printAt(1, 60, "analog: %f mV", pot.value(analogUnits::mV));
+    
+    //Sleep the task for a short amount of time to prevent wasted resources.
+    task::sleep(500);
+}
