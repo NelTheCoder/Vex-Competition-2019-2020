@@ -24,7 +24,6 @@
 
 #include "Lift_Functions.h"
 #include "claw_functions.h"
-#include "vacuum_spinnys.h"
 #include "Driving_Functions.h"
 #include "vex.h"
 
@@ -82,7 +81,8 @@ int main() {
     else
     {
       Drive();
-      Controller1.ButtonR2.pressed(ClawOpenorClose);
+      Controller1.ButtonR2.pressed(Claw_Open);
+      Controller1.ButtonL2.pressed(Claw_Close);
       Lift();
     }
   }

@@ -12,11 +12,11 @@
 
 #include "vex.h"
 
-double claw_value = 200;
+double claw_value = 90;
  
 using namespace vex;
 
-bool claw_status = true;
+bool claw_status = false;
 
 void ClawOpenorClose()
 {
