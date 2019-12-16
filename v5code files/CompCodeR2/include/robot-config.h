@@ -11,6 +11,8 @@ extern motor Lift_left;
 extern motor Lift_right;
 extern motor claw;
 extern controller Controller1;
+extern pot Left_pot;
+extern pot Right_pot;
 
 /**
  * Used to initialize code/tasks/devices added using tools in VEXcode Text.

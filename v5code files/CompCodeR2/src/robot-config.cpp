@@ -16,6 +16,8 @@ motor Lift_left = motor(PORT1, ratio36_1, false);
 motor Lift_right = motor(PORT2, ratio36_1, true);
 motor claw = motor(PORT19, ratio36_1, true);
 controller Controller1 = controller(primary);
+pot Left_pot = pot(Brain.ThreeWirePort.B);
+pot Right_pot = pot(Brain.ThreeWirePort.A);
 
 // VEXcode generated functions
 

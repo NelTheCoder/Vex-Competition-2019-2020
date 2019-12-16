@@ -18,6 +18,8 @@
 // Lift_right           motor         2               
 // claw                 motor         19              
 // Controller1          controller                    
+// Left_pot             pot           B               
+// Right_pot            pot           A               
 // ---- END VEXCODE CONFIGURED DEVICES ----
 
 #include "vex.h"
@@ -69,9 +71,9 @@ void autonomous(void) {
   Left_motor.setVelocity(75, percentUnits::pct);
   Right_motor.setVelocity(75, percentUnits::pct);
 
-  //go forward
-  Left_motor.rotateFor(directionType::rev, 360, rotationUnits::deg, false);
-  Right_motor.rotateFor(directionType::fwd, 360, rotationUnits::deg);
+  /*//go forward
+  Left_motor.rotateFor(directionType::rev, 900, rotationUnits::deg, false);
+  Right_motor.rotateFor(directionType::fwd, 900, rotationUnits::deg);
 
   //turn 90 left
   Left_motor.rotateFor(directionType::fwd, 180, rotationUnits::deg, false);
@@ -118,7 +120,7 @@ void autonomous(void) {
   claw.rotateFor(directionType::fwd, 95, rotationUnits::deg);
   //go backwards
   Left_motor.rotateFor(directionType::fwd, 360, rotationUnits::deg, false);
-  Right_motor.rotateFor(directionType::rev, 360, rotationUnits::deg);
+  Right_motor.rotateFor(directionType::rev, 360, rotationUnits::deg);*/
 }
 
 /*---------------------------------------------------------------------------*/
@@ -133,7 +135,11 @@ void autonomous(void) {
 
 void usercontrol(void) {
   // User control code here, inside the loop
-  while (1) {
+  while (true) {
+    Brain.Screen.clearScreen();
+    Brain.Screen.print(Left_pot.value(rotationUnits::deg));
+    Brain.Screen.newLine();
+    Brain.Screen.print(Right_pot.value(rotationUnits::deg));
     if (Controller1.ButtonLeft.pressing() && Controller1.ButtonA.pressing()) {
       // all motors stop
       Top_left.stop();
@@ -144,7 +150,7 @@ void usercontrol(void) {
       Lift_right.stop();
       claw.stop();
 
-      task::sleep(999); // the motors wait 1 second
+      task::sleep(999); // the motors wait less then one second
 
       // the motors run for a little bit then you can control it again
       Top_left.spin(fwd, 10, velocityUnits::pct);
@@ -174,7 +180,7 @@ void usercontrol(void) {
 //
 int main() {
   claw.startRotateFor(directionType::rev, 170, rotationUnits::deg);
-  Brain.Screen.print("oh noes! XVI");
+  Brain.Screen.print("god howard");
   // Set up callbacks for autonomous and driver control periods.
   Competition.autonomous(autonomous);
   Competition.drivercontrol(usercontrol);
