@@ -1,0 +1,62 @@
+
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*    Module:       main.cpp                                                  */
+/*    Author:       C:\Users\25krugercharles                                  */
+/*    Created:      Mon Nov 04 2019                                           */
+/*    Description:  V5 project                                                */
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
+
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// ---- END VEXCODE CONFIGURED DEVICES ----
+
+#include "vex.h"
+ 
+using namespace vex;
+
+void Potentiometer()
+{
+// loop forever to always update the information displayed on the screen
+while(1) 
+{
+    Brain.Screen.clearScreen();
+    
+    // display the potentiometer rotation value on the screen
+    //"pot" is the declared name for the potentiometer
+    Brain.Screen.printAt(1, 20, "rotation: %f degrees", LeftP.value(rotationUnits::deg));
+
+    // display the potentiometer percent value on the screen
+    Brain.Screen.printAt(1, 40, "percent: %f %%", LeftP.value(percentUnits::pct));
+    
+    // display the potentiometer analog value on the screen
+    Brain.Screen.printAt(1, 60, "analog: %f mV", LeftP.value(analogUnits::mV));
+
+    // display the potentiometer rotation value on the screen
+    //"pot" is the declared name for the potentiometer
+    Brain.Screen.printAt(50, 50, "rotation: %f degrees", RightP.value(rotationUnits::deg));
+
+    // display the potentiometer percent value on the screen
+    Brain.Screen.printAt(50, 70, "percent: %f %%", RightP.value(percentUnits::pct));
+    
+    // display the potentiometer analog value on the screen
+    Brain.Screen.printAt(50, 90, "analog: %f mV", RightP.value(analogUnits::mV));
+    
+    //Sleep the task for a short amount of time to prevent wasted resources.
+    task::sleep(1000);
+
+if(LeftP.value(rotationUnits::deg) - RightP.value(rotationUnits::deg) < 0)
+{
+  return;
+}
+else if(LeftP.value(rotationUnits::deg) - RightP.value(rotationUnits::deg) > 0)                    
+{
+  Lift_left.startRotateFor(directionType::fwd, 1, rotationUnits::deg);
+}
+else if(LeftP.value(rotationUnits::deg) - RightP.value(rotationUnits::deg) > 0)
+{
+  Lift_right.startRotateFor(directionType::fwd, 1, rotationUnits::deg);
+}
+}
+}
+
