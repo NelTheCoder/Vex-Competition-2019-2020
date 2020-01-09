@@ -20,8 +20,8 @@ pot Left_pot = pot(Brain.ThreeWirePort.B);
 pot Right_pot = pot(Brain.ThreeWirePort.A);
 
 // VEXcode generated functions
-
-
+// define variable for remote controller enable/disable
+bool RemoteControlCodeEnabled = true;
 
 /**
  * Used to initialize code/tasks/devices added using tools in VEXcode Text.

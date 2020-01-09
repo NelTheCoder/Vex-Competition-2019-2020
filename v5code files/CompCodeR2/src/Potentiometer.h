@@ -9,3 +9,8 @@ void potentiometer()
     //do stuf
   }
 }
+
+/*
+if(Left)
+
+*/

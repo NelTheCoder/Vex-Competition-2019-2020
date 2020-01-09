@@ -51,6 +51,7 @@ void pre_auton(void) {
   
   // All activities that occur before the competition starts
   // Example: clearing encoders, setting servo positions, ...
+  //turn 90 leftZ
 }
 
 /*---------------------------------------------------------------------------*/
@@ -71,56 +72,46 @@ void autonomous(void) {
   Left_motor.setVelocity(75, percentUnits::pct);
   Right_motor.setVelocity(75, percentUnits::pct);
 
-  /*//go forward
-  Left_motor.rotateFor(directionType::rev, 900, rotationUnits::deg, false);
-  Right_motor.rotateFor(directionType::fwd, 900, rotationUnits::deg);
+  //move forward
+  Left_motor.rotateFor(directionType::rev, 100, rotationUnits::deg);
+  Right_motor.rotateFor(directionType::fwd, 100, rotationUnits::deg);
 
-  //turn 90 left
-  Left_motor.rotateFor(directionType::fwd, 180, rotationUnits::deg, false);
+  //open claw
+  claw.rotateFor(directionType::fwd, 70, rotationUnits::deg);
+
+  //lift - up
+  Lift_left.rotateFor(directionType::fwd, 70, rotationUnits::deg);
+  Lift_right.rotateFor(directionType::fwd, 70, rotationUnits::deg);
+
+  //move forward
+  Left_motor.rotateFor(directionType::rev, 15, rotationUnits::deg);
+  Right_motor.rotateFor(directionType::fwd, 15, rotationUnits::deg);
+
+  //close claw
+  claw.rotateFor(directionType::rev, 60, rotationUnits::deg);
+
+  //move backward
+  Left_motor.rotateFor(directionType::fwd, 115, rotationUnits::deg);
+  Right_motor.rotateFor(directionType::rev, 115, rotationUnits::deg);
+
+  //turn left
+  Left_motor.rotateFor(directionType::fwd, 180, rotationUnits::deg);
   Right_motor.rotateFor(directionType::fwd, 180, rotationUnits::deg);
 
-  //go forward
-  Left_motor.rotateFor(directionType::rev, 90, rotationUnits::deg, false);
-  Right_motor.rotateFor(directionType::fwd, 90, rotationUnits::deg);
+  //move forward
+  Left_motor.rotateFor(directionType::rev, 200, rotationUnits::deg);
+  Right_motor.rotateFor(directionType::fwd, 200, rotationUnits::deg);
 
-  //pick up cubes
-  //https://www.nytimes.com/2019/12/07/style/its-karentown.html
-  Left_motor.rotateFor(directionType::rev, 90, rotationUnits::deg, false);
-  Right_motor.rotateFor(directionType::fwd, 90, rotationUnits::deg);
+  //lift - down
+  Lift_left.rotateFor(directionType::rev, 65, rotationUnits::deg);
+  Lift_right.rotateFor(directionType::rev, 65, rotationUnits::deg);
 
-  claw.rotateFor(directionType::rev, 95, rotationUnits::deg);
+  //open claw
+  claw.rotateFor(directionType::fwd, 50, rotationUnits::deg);
 
-  Lift_left.startRotateFor(directionType::fwd, 25, rotationUnits::deg);
-  Lift_right.rotateFor(directionType::fwd, 25, rotationUnits::deg);
-
-  //go backwards
-  Left_motor.rotateFor(directionType::rev, 90, rotationUnits::deg, false);
-  Right_motor.rotateFor(directionType::fwd, 90, rotationUnits::deg);
-
-  //turn 90 right
-  Left_motor.rotateFor(directionType::rev, 180, rotationUnits::deg, false);
-  Right_motor.rotateFor(directionType::rev, 180, rotationUnits::deg);
-
-  //go backwards
-  Left_motor.rotateFor(directionType::rev, 360, rotationUnits::deg, false);
-  Right_motor.rotateFor(directionType::fwd, 360, rotationUnits::deg);
-
-  //turn 90 right
-  Left_motor.rotateFor(directionType::rev, 360, rotationUnits::deg, false);
-  Right_motor.rotateFor(directionType::rev, 360, rotationUnits::deg);
-
-  //go forwards
-  Left_motor.rotateFor(directionType::rev, 360, rotationUnits::deg, false);
-  Right_motor.rotateFor(directionType::fwd, 360, rotationUnits::deg);
-
-  //drop cubes
-  Lift_left.startRotateFor(directionType::rev, 25, rotationUnits::deg);
-  Lift_right.rotateFor(directionType::rev, 25, rotationUnits::deg);
-
-  claw.rotateFor(directionType::fwd, 95, rotationUnits::deg);
-  //go backwards
-  Left_motor.rotateFor(directionType::fwd, 360, rotationUnits::deg, false);
-  Right_motor.rotateFor(directionType::rev, 360, rotationUnits::deg);*/
+  //move backward
+  Left_motor.rotateFor(directionType::fwd, 115, rotationUnits::deg);
+  Right_motor.rotateFor(directionType::rev, 115, rotationUnits::deg);
 }
 
 /*---------------------------------------------------------------------------*/
@@ -136,10 +127,6 @@ void autonomous(void) {
 void usercontrol(void) {
   // User control code here, inside the loop
   while (true) {
-    Brain.Screen.clearScreen();
-    Brain.Screen.print(Left_pot.value(rotationUnits::deg));
-    Brain.Screen.newLine();
-    Brain.Screen.print(Right_pot.value(rotationUnits::deg));
     if (Controller1.ButtonLeft.pressing() && Controller1.ButtonA.pressing()) {
       // all motors stop
       Top_left.stop();
@@ -171,6 +158,18 @@ void usercontrol(void) {
       Controller1.ButtonR2.pressed(ClawOpenorClose);
       Controller1.ButtonL2.pressed(Claw_Close);
       Lift();
+      /*if(Right_pot.value(rotationUnits::deg) - Left_pot.value(rotationUnits::deg) > 5)
+      {
+        Lift_left.startRotateFor(directionType::fwd, 1, rotationUnits::deg);
+      }
+      else if(Right_pot.value(rotationUnits::deg) - Left_pot.value(rotationUnits::deg) < -4)
+      {
+        Lift_right.startRotateFor(directionType::fwd, 1, rotationUnits::deg);
+      }
+      else 
+      {
+        return;
+      }*/
     }
   }
 }
@@ -180,7 +179,7 @@ void usercontrol(void) {
 //
 int main() {
   claw.startRotateFor(directionType::rev, 170, rotationUnits::deg);
-  Brain.Screen.print("god howard");
+  Controller1.Screen.print("godd howard");
   // Set up callbacks for autonomous and driver control periods.
   Competition.autonomous(autonomous);
   Competition.drivercontrol(usercontrol);

@@ -12,7 +12,7 @@
 
 #include "vex.h"
 
-double claw_value = 70;
+double claw_value = 100;
  
 using namespace vex;
 
