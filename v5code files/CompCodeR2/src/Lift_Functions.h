@@ -21,8 +21,8 @@ void Lift()
 {
   if(Controller1.ButtonR1.pressing()) //this is for going up
   {
-    Lift_left.setMaxTorque(90, percentUnits::pct); //can change the torque for up
-    Lift_right.setMaxTorque(90, percentUnits::pct);
+    Lift_left.setMaxTorque(87.5, percentUnits::pct); //can change the torque for up
+    Lift_right.setMaxTorque(87.5, percentUnits::pct);
     if (((Lift_left.rotation(rotationUnits::deg) + Lift_right.rotation(rotationUnits::deg)) / 2) < 750)
     {
       Lift_left.spin(directionType::fwd, lift_speed, velocityUnits::pct);
