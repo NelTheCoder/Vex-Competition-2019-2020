@@ -69,30 +69,30 @@ void autonomous(void) {
   motor_group Right_motor(Top_right, Bottom_right);
   
   //set speed
-  Left_motor.setVelocity(75, percentUnits::pct);
-  Right_motor.setVelocity(75, percentUnits::pct);
+  Left_motor.setVelocity(100, percentUnits::pct);
+  Right_motor.setVelocity(100, percentUnits::pct);
 
-  //move forward
-  Left_motor.rotateFor(directionType::rev, 100, rotationUnits::deg);
-  Right_motor.rotateFor(directionType::fwd, 100, rotationUnits::deg);
+  /*move forward
+  Left_motor.startRotateFor(directionType::rev, 600, rotationUnits::deg);
+  Right_motor.rotateFor(directionType::fwd, 600, rotationUnits::deg);
 
   //open claw
   claw.rotateFor(directionType::fwd, 70, rotationUnits::deg);
 
   //lift - up
-  Lift_left.rotateFor(directionType::fwd, 70, rotationUnits::deg);
-  Lift_right.rotateFor(directionType::fwd, 70, rotationUnits::deg);
+  Lift_left.startRotateFor(directionType::fwd, 300, rotationUnits::deg);
+  Lift_right.rotateFor(directionType::fwd, 300, rotationUnits::deg);
 
   //move forward
-  Left_motor.rotateFor(directionType::rev, 15, rotationUnits::deg);
-  Right_motor.rotateFor(directionType::fwd, 15, rotationUnits::deg);
+  Left_motor.rotateFor(directionType::rev, 50, rotationUnits::deg);
+  Right_motor.rotateFor(directionType::fwd, 50, rotationUnits::deg);
 
   //close claw
   claw.rotateFor(directionType::rev, 60, rotationUnits::deg);
 
   //move backward
-  Left_motor.rotateFor(directionType::fwd, 115, rotationUnits::deg);
-  Right_motor.rotateFor(directionType::rev, 115, rotationUnits::deg);
+  Left_motor.rotateFor(directionType::fwd, 300, rotationUnits::deg);
+  Right_motor.rotateFor(directionType::rev, 300, rotationUnits::deg);
 
   //turn left
   Left_motor.rotateFor(directionType::fwd, 180, rotationUnits::deg);
@@ -111,7 +111,19 @@ void autonomous(void) {
 
   //move backward
   Left_motor.rotateFor(directionType::fwd, 115, rotationUnits::deg);
-  Right_motor.rotateFor(directionType::rev, 115, rotationUnits::deg);
+  Right_motor.rotateFor(directionType::rev, 115, rotationUnits::deg);*/
+  Top_left.startRotateFor(directionType::fwd, 600, rotationUnits::deg);
+  Bottom_left.startRotateFor(directionType::fwd, 600, rotationUnits::deg);
+  Top_right.startRotateFor(directionType::rev, 600, rotationUnits::deg);
+  Bottom_right.rotateFor(directionType::rev, 600, rotationUnits::deg);
+
+  wait(250, msec);
+
+  claw.startRotateFor(directionType::fwd, 70, rotationUnits::deg);
+  Top_left.startRotateFor(directionType::rev, 600, rotationUnits::deg);
+  Bottom_left.startRotateFor(directionType::rev, 600, rotationUnits::deg);
+  Top_right.startRotateFor(directionType::fwd, 600, rotationUnits::deg);
+  Bottom_right.rotateFor(directionType::fwd, 600, rotationUnits::deg);
 }
 
 /*---------------------------------------------------------------------------*/
